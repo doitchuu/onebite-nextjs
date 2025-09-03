@@ -3,9 +3,11 @@ import { useRouter } from "next/router";
 export default function Page() {
   const router = useRouter();
 
+  console.log(router, "router");
+
   return (
     <div>
-      <h1>검색: {router.query.q}</h1>
+      <h1>{router.query.id}도서 상세 페이지</h1>
     </div>
   );
 }
