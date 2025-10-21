@@ -1,4 +1,6 @@
+import { ReactNode } from "react";
 import style from "./index.module.css";
+import SearchbarLayout from "@/components/searchbar-layout";
 
 export default function Home() {
   return (
@@ -7,3 +9,7 @@ export default function Home() {
     </div>
   );
 }
+
+Home.getLayout = (page: ReactNode) => {
+  return <SearchbarLayout>{page}</SearchbarLayout>;
+};
