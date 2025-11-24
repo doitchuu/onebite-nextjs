@@ -7,9 +7,9 @@ import BookItem from "@/components/book-item";
 import fetchBooks from "@/lib/fetch-books";
 import fetchRandomBooks from "@/lib/fetch-random-books";
 
-import { InferGetServerSidePropsType } from "next";
+import { InferGetStaticPropsType } from "next";
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const books = await fetchBooks();
   const randomBooks = await fetchRandomBooks();
 
@@ -19,7 +19,7 @@ export async function getServerSideProps() {
 export default function Home({
   books,
   randomBooks,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div className={style.container}>
       <section>
