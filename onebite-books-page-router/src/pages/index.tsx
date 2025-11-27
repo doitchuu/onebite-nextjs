@@ -2,12 +2,12 @@ import { ReactNode } from "react";
 import style from "./index.module.css";
 import SearchbarLayout from "@/components/searchbar-layout";
 import BookItem from "@/components/book-item";
-// import books from "../mock/books.json";
 
 import fetchBooks from "@/lib/fetch-books";
 import fetchRandomBooks from "@/lib/fetch-random-books";
 
 import { InferGetStaticPropsType } from "next";
+import Head from "next/head";
 
 export async function getStaticProps() {
   const books = await fetchBooks();
@@ -21,20 +21,31 @@ export default function Home({
   randomBooks,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <div className={style.container}>
-      <section>
-        <h3>지금 추천하는 도서</h3>
-        {books.map((book) => (
-          <BookItem key={book.id} {...book} />
-        ))}
-      </section>
-      <section>
-        <h3>모든 도서</h3>
-        {randomBooks.map((book) => (
-          <BookItem key={book.id} {...book} />
-        ))}
-      </section>
-    </div>
+    <>
+      <Head>
+        <title>한입북스</title>
+        <meta property="og:title" content="한입북스-검색결과" />
+        <meta
+          property="og:description"
+          content="한입북스에 등록된 도서들을 만나보세요."
+        />
+        <meta property="og:image" content="/thumbnail.png" />
+      </Head>
+      <div className={style.container}>
+        <section>
+          <h3>지금 추천하는 도서</h3>
+          {books.map((book) => (
+            <BookItem key={book.id} {...book} />
+          ))}
+        </section>
+        <section>
+          <h3>모든 도서</h3>
+          {randomBooks.map((book) => (
+            <BookItem key={book.id} {...book} />
+          ))}
+        </section>
+      </div>
+    </>
   );
 }
 
